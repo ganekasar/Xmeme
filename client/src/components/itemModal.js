@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
     Button,
     Modal,
@@ -13,9 +13,12 @@ import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 
 class ItemModal extends Component {
+
     state = {
         modal: false,
-        name: ''
+        name: '',
+        link: '',
+        caption: ''
     }
 
     toggle = () => {
@@ -32,7 +35,9 @@ class ItemModal extends Component {
         e.preventDefault();
 
         const newItem = {
-            name: this.state.name
+            name: this.state.name,
+            link: this.state.link,
+            caption: this.state.caption
         }
 
         // Add Item via addItem action
@@ -55,24 +60,45 @@ class ItemModal extends Component {
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Add Your Meme</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item">Item</Label>
+                                <Label for="name">Name</Label>
                                 <Input 
                                     type="text"
                                     name="name"
-                                    id="item"
-                                    placeholder="Add Shopping Item"
+                                    id="name"
+                                    placeholder="Your Name.."
                                     onChange={this.onChange}
                                 ></Input>
+                            </FormGroup>  
+                            <FormGroup>    
+                                <Label for="link">Link</Label>
+                                <Input
+                                    type="text"
+                                    name="link"
+                                    id="link"
+                                    placeholder="Paste Link Here.."
+                                    onChange={this.onChange}
+                                ></Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="caption">Caption</Label>
+                                <Input
+                                    type="textarea"
+                                    name="caption"
+                                    id="caption"
+                                    placeholder="Add Caption.."
+                                    onChange={this.onChange}
+                                ></Input>
+                            </FormGroup>
                                 <Button
                                     color="dark"
                                     style={{marginTop: '2rem'}}
                                     block
                                 >Add Item</Button>
-                            </FormGroup>
+                            
                         </Form>
                     </ModalBody>
                 </Modal>

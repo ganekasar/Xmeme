@@ -7,6 +7,12 @@ const ItemSchema = new Schema({
         type: String,
         required: true
     },
+    link : {
+        type: String
+    },
+    caption : {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now
