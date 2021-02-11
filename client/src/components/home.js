@@ -9,7 +9,9 @@ import {
     CardBody, 
     CardLink,
     CardTitle, 
-    CardSubtitle 
+    CardSubtitle ,
+    CardHeader,
+    CardFooter
 } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
@@ -34,23 +36,28 @@ class List extends Component {
                     <TransitionGroup className="list">
                         {items.map(({ _id, name, link, caption }) => (
                             <Card className="list-item">
-                                <CardBody className="item-name">
-                                    <CardTitle tag="h3">{name}</CardTitle>
+                                <CardHeader className="item-name">
+                                    <CardBody>
+                                        <CardTitle tag="h5"><img src="actor.png" alt="actor" className="profile" />{name}</CardTitle>
+                                    </CardBody>
+                                </CardHeader>
+                                
+                                <CardBody>
+                                    <img width="325px" src={link} alt="Meme" />
                                 </CardBody>
                                 <CardBody>
-                                    <img width="300px" src={link} alt="Meme" />
+                                    <CardText tag="h6">{caption}</CardText>
                                 </CardBody>
-                                <CardBody>
-                                    <CardText tag="h4">{caption}</CardText>
-                                </CardBody>
-                                <CardBody>
-                                    <Button
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.onDeleteClick.bind(this, _id)}
-                                    >Delete</Button>
-                                </CardBody>
+                                <CardFooter className="item-name">
+                                    <CardBody>
+                                        <Button
+                                            className="remove-btn"
+                                            color="danger"
+                                            size="sm"
+                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                        >Delete</Button>
+                                    </CardBody>
+                                </CardFooter>
                             </Card>
                         ))}
                     </TransitionGroup>

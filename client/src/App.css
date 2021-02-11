@@ -22,7 +22,7 @@
 
 @media screen and (min-width: 480px) {
   .home-page {
-    width: 50%;
+    width: 40%;
   }
 }
 
@@ -36,6 +36,18 @@
   margin-bottom: 5%;
 }
 
+.remove-btn {
+  margin-left: 40%;
+  margin-right: 40%;
+}
+
 .item-name {
-  height: 50px;
+  height: 75px;
+  width: 100%;
+}
+
+.profile {
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 20px;
 }
