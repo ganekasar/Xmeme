@@ -19,3 +19,23 @@
   opacity: 0.01;
   transition: opacity 1000ms ease-in;
 }
+
+@media screen and (min-width: 480px) {
+  .home-page {
+    width: 50%;
+  }
+}
+
+.list-item {
+  align-items: center;
+  align-self: center;
+}
+
+.add-btn {
+  color: white;
+  margin-bottom: 5%;
+}
+
+.item-name {
+  height: 50px;
+}

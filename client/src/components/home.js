@@ -29,29 +29,29 @@ class List extends Component {
     render () {
         const { items } = this.props.item;;
         return (
-            <Container>
+            <Container fluid className="home-page">
                 <ListGroup>
-                    <TransitionGroup className="shopping-list">
+                    <TransitionGroup className="list">
                         {items.map(({ _id, name, link, caption }) => (
-                            <div>
-                                <Card>
-                                    <CardBody>
-                                        <CardTitle tag="h5">{name}</CardTitle>
-                                    </CardBody>
-                                    <img width="100%" src={link} alt="Meme" />
-                                    <CardBody>
-                                        <CardText>{caption}</CardText>
-                                    </CardBody>
-                                    <CardBody>
-                                        <Button
-                                            className="remove-btn"
-                                            color="danger"
-                                            size="sm"
-                                            onClick={this.onDeleteClick.bind(this, _id)}
-                                        >Delete</Button>
-                                    </CardBody>
-                                </Card>
-                            </div>
+                            <Card className="list-item">
+                                <CardBody className="item-name">
+                                    <CardTitle tag="h3">{name}</CardTitle>
+                                </CardBody>
+                                <CardBody>
+                                    <img width="300px" src={link} alt="Meme" />
+                                </CardBody>
+                                <CardBody>
+                                    <CardText tag="h4">{caption}</CardText>
+                                </CardBody>
+                                <CardBody>
+                                    <Button
+                                        className="remove-btn"
+                                        color="danger"
+                                        size="sm"
+                                        onClick={this.onDeleteClick.bind(this, _id)}
+                                    >Delete</Button>
+                                </CardBody>
+                            </Card>
                         ))}
                     </TransitionGroup>
                 </ListGroup>
