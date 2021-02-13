@@ -10,15 +10,34 @@ import {
     Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/itemActions';
+import { updateItem } from '../actions/itemActions';
 
-class ItemModal extends Component {
+class UpadteModal extends Component {
 
     state = {
         modal: false,
         name: '',
         link: '',
         caption: ''
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            _id: this.props._id,
+            name: this.props.name,    
+            link: this.props.link,
+            caption: this.props.caption
+        }
+    }
+
+    state = {
+        modal: false,
+        _id: this.props._id,
+        name: this.props.name,    
+        link: this.props.link,
+        caption: this.props.caption
     }
 
     toggle = () => {
@@ -35,13 +54,14 @@ class ItemModal extends Component {
         e.preventDefault();
 
         const newItem = {
+            _id: this.state._id,
             name: this.state.name,
             link: this.state.link,
             caption: this.state.caption
         }
 
-        // Add Item via addItem action
-        this.props.addItem(newItem);
+        // Update Item via updateItem action
+        this.props.updateItem(newItem);
 
         // Close modal
         this.toggle();
@@ -51,16 +71,16 @@ class ItemModal extends Component {
         return (
             <div>
                 <Button
-                    color="dark"
-                    className="add-btn"
+                    size="sm"
+                    outline color="warning"
                     onClick={this.toggle}
-                >Add Item</Button>
+                >Update</Button>
 
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}>Add Your Meme</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Update the Meme</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
@@ -71,6 +91,8 @@ class ItemModal extends Component {
                                     id="name"
                                     placeholder="Your Name.."
                                     onChange={this.onChange}
+                                    value={this.state.name}
+                                    
                                 ></Input>
                             </FormGroup>  
                             <FormGroup>    
@@ -80,7 +102,9 @@ class ItemModal extends Component {
                                     name="link"
                                     id="link"
                                     placeholder="Paste Link Here.."
+                                    value={this.state.link}
                                     onChange={this.onChange}
+                                    readOnly
                                 ></Input>
                             </FormGroup>
                             <FormGroup>
@@ -90,6 +114,7 @@ class ItemModal extends Component {
                                     name="caption"
                                     id="caption"
                                     placeholder="Add Caption.."
+                                    value={this.state.caption}
                                     onChange={this.onChange}
                                 ></Input>
                             </FormGroup>
@@ -97,7 +122,7 @@ class ItemModal extends Component {
                                     color="dark"
                                     style={{marginTop: '2rem'}}
                                     block
-                                >Add Item</Button>
+                                >Update Item</Button>
                             
                         </Form>
                     </ModalBody>
@@ -112,4 +137,4 @@ const mapStateToProps = state => ({
     item: state.item
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal);
+export default connect(mapStateToProps, { updateItem })(UpadteModal);

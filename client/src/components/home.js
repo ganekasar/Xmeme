@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { 
     Container, 
     ListGroup, 
-    ListGroupItem, 
     Button,
     Card, 
     CardText, 
     CardBody, 
-    CardLink,
     CardTitle, 
     CardSubtitle ,
     CardHeader,
     CardFooter
 } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/itemActions';
+import { getItems, deleteItem, updateItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import UpdateModal from '../components/updateModal'
+import moment from 'moment';
 
 class List extends Component {
 
@@ -28,13 +28,18 @@ class List extends Component {
         this.props.deleteItem(id);
     }
 
+    onUpdateClick = id => {
+        this.props.updateItem(id);
+    }
+
     render () {
         const { items } = this.props.item;;
         return (
             <Container fluid className="home-page">
                 <ListGroup>
                     <TransitionGroup className="list">
-                        {items.map(({ _id, name, link, caption }) => (
+                        {items.map(({ _id, name, link, caption, date }) => (
+                            
                             <Card className="list-item">
                                 <CardHeader className="item-name">
                                     <CardBody>
@@ -45,19 +50,33 @@ class List extends Component {
                                 <CardBody>
                                     <img width="325px" src={link} alt="Meme" />
                                 </CardBody>
+                            
                                 <CardBody>
                                     <CardText tag="h6">{caption}</CardText>
                                 </CardBody>
+
+                                <CardBody>
+                                    <CardSubtitle tag="p">Created On : {moment(date).format('DD-MM-YYYY')}</CardSubtitle>
+                                </CardBody>
+
+                            
                                 <CardFooter className="item-name">
                                     <CardBody>
                                         <Button
                                             className="remove-btn"
-                                            color="danger"
+                                            outline color="danger"
                                             size="sm"
                                             onClick={this.onDeleteClick.bind(this, _id)}
                                         >Delete</Button>
+
+                                        <Button
+                                            outline color="white"
+                                            className="update-btn"
+                                        ><UpdateModal name={name} link={link} caption={caption} _id={_id} /></Button>
+                                        
                                     </CardBody>
                                 </CardFooter>
+                            
                             </Card>
                         ))}
                     </TransitionGroup>
@@ -76,4 +95,4 @@ const mapStateToProps = (state) => ({
     item: state.item
 });
 
-export default connect(mapStateToProps, { getItems, deleteItem })(List);
+export default connect(mapStateToProps, { getItems, deleteItem, updateItem })(List);

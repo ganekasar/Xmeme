@@ -1,4 +1,4 @@
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, UPDATE_ITEM } from '../actions/types';
 
 const initialState = {
     items: [],
@@ -31,6 +31,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading: true
+            }
+
+        case UPDATE_ITEM:
+            return {
+                ...state,
+                items: [action.payload, ...state.items]
             }
 
         default:

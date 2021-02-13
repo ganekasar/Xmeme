@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, UPDATE_ITEM } from './types';
 
 export const getItems = () => dispatch => {
     dispatch(setItemsLoading());
@@ -29,9 +29,9 @@ export const deleteItem = id => dispatch => {
         .delete(`/api/items/${id}`)
             .then(res => 
                 dispatch({
-                type: DELETE_ITEM,
-                payload: id
-            })
+                    type: DELETE_ITEM,
+                    payload: id
+                })
         );
 };
 
@@ -40,3 +40,15 @@ export const setItemsLoading = () => {
         type: ITEMS_LOADING
     };
 };
+
+export const updateItem = item => dispatch => {
+
+    axios   
+        .put(`api/items/${item._id}`, item)
+            .then(res => 
+                dispatch({
+                    type: UPDATE_ITEM,
+                    payload: res.data
+                })
+            );
+}
