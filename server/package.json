@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "babel-node server.js",
     "client-install": "cd ../client && npm install",
     "server": "nodemon index.js",
     "client": "cd ../client && npm start",
@@ -21,6 +21,7 @@
     "mongoose": "^5.9.29"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "nodemon": "^2.0.7"
   }
 }
