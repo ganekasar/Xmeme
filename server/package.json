@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node -r esm index.js",
     "client-install": "cd ../client && npm install",
-    "server": "nodemon index.js",
+    "server": "node -r esm index.js",
     "client": "cd ../client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
