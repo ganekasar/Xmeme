@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import itemReducer from './itemReducer';
 
-export default combineReducers({
-    item: itemReducer
-});
+import posts from './posts';
+
+export const reducers = combineReducers({ posts });
