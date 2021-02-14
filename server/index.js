@@ -2,8 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
-import postRoutes from './routes/posts.js';
+const postRoutes = require('./routes/posts.js');
 
 const app = express();
 
